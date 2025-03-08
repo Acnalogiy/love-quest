@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Волшебный квест любви</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive;
+            text-align: center;
+            background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+            padding: 20px;
+            color: #d6336c;
+            overflow-x: hidden;
+        }
+        .stage {
+            display: none;
+            margin: 20px auto;
+            max-width: 700px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 0 20px rgba(255, 105, 180, 0.5);
+            animation: fadeIn 1s ease-in;
+        }
+        .active {
+            display: block;
+        }
+        h1, h2 {
+            color: #ff4757;
+            text-shadow: 2px 2px 4px #ffb1b1;
+        }
+        img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            margin: 15px 0;
+            border: 3px solid #ff6b81;
+            transition: transform 0.3s;
+        }
+        img:hover {
+            transform: scale(1.05);
+        }
+        p {
+            font-size: 18px;
+            line-height: 1.5;
+        }
+        input {
+            padding: 12px;
+            margin: 10px;
+            font-size: 16px;
+            border: 2px solid #ff6b81;
+            border-radius: 10px;
+            width: 70%;
+        }
+        button {
+            padding: 12px 25px;
+            margin: 10px;
+            font-size: 18px;
+            background: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            box-shadow: 0 5px #d6336c;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #ff6b81;
+            transform: translateY(-2px);
+            box-shadow: 0 7px #d6336c;
+        }
+        button:active {
+            transform: translateY(2px);
+            box-shadow: 0 2px #d6336c;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .heart {
+            position: absolute;
+            font-size: 30px;
+            color: #ff4757;
+            animation: float 5s infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh); opacity: 1; }
+            100% { transform: translateY(-20px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+
+    <div id="stage1" class="stage active">
+        <h1>Погрузись в магию любви!</h1>
+        <p>Этот квест — путешествие в мир чувств. Разгадай первую тайну...</p>
+        <img src="images/1.jpg" alt="Романтика 1">
+        <p>Я — страсть в ночи, что зажигает сердца, но гаснет с рассветом. Что я?</p>
+        <input type="text" id="answer1">
+        <button onclick="checkAnswer(1)">Разгадать!</button>
+    </div>
+
+    <div id="stage2" class="stage">
+        <h2>Второй вихрь страсти</h2>
+        <p>Любовь кружит голову...</p>
+        <img src="images/2.jpg" alt="Романтика 2">
+        <p>Я — танец двоих, где шаги — это ритм сердец. Назови меня!</p>
+        <inp
+ut type="text" id="answer2">
+        <button onclick="checkAnswer(2)">Разгадать!</button>
+    </div>
+
+    <div id="stage3" class="stage">
+        <h2>Третий ключ к вечности</h2>
+        <p>Любовь — это загадка времени...</p>
+        <img src="images/3.jpg" alt="Романтика 3">
+        <p>Я — обещание, что шепчут под звёздами, связывая судьбы. Что я?</p>
+        <input type="text" id="answer3">
+        <button onclick="checkAnswer(3)">Разгадать!</button>
+    </div>
+
+    <div id="stage4" class="stage">
+        <h2>Четвёртая искра</h2>
+        <p>Сердце пылает ярче...</p>
+        <img src="images/4.jpg" alt="Романтика 4">
+        <p>Я — мелодия, что влюблённые напевают, не зная слов. Назови меня!</p>
+        <input type="text" id="answer4">
+        <button onclick="checkAnswer(4)">Разгадать!</button>
+    </div>
+
+    <div id="stage5" class="stage">
+        <h2>Финальная тайна любви</h2>
+        <p>Последний шаг к звёздам...</p>
+        <img src="images/5.jpg" alt="Романтика 5">
+        <p>Я — невидимая нить, что держит нас вместе через годы. Что я такое?</p>
+        <input type="text" id="answer5">
+        <button onclick="checkAnswer(5)">Разгадать!</button>
+    </div>
+
+    <div id="final" class="stage">
+        <h1>Ты — моё чудо!</h1>
+        <p>Ты раскрыла все тайны любви, и моё сердце бьётся для тебя!</p>
+        <img src="images/10.jpg" alt="Финальное фото">
+        <p>С праздником, моя звезда! Пусть наша любовь сияет вечно! ❤️</p>
+    </div>
+
+    <script>
+        // Проверка ответов
+        function checkAnswer(stage) {
+            let answer = document.getElementById(`answer${stage}`).value.toLowerCase().trim();
+            let nextStage = stage + 1;
+
+            if (stage === 1 && answer === "свеча") {
+                switchStage(nextStage);
+            } else if (stage === 2 && answer === "вальс") {
+                switchStage(nextStage);
+            } else if (stage === 3 && answer === "клятва") {
+                switchStage(nextStage);
+            } else if (stage === 4 && answer === "колыбельная") {
+                switchStage(nextStage);
+            } else if (stage === 5 && answer === "судьба") {
+                switchStage("final");
+            } else {
+                alert("Тайна ещё скрыта! Подумай глубже о любви...");
+            }
+        }
+
+        // Переключение этапов
+        function switchStage(next) {
+            document.querySelectorAll('.stage').forEach(stage => {
+                stage.classList.remove('active');
+            });
+            document.getElementById(`stage${next}`).classList.add('active');
+        }
+
+        // Анимация сердец
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 3 + 3 + 's';
+            document.getElementById('hearts').appendChild(heart);
+            setTimeout(() => heart.remove(), 5000);
+        }
+        setInterval(createHeart, 300);
+    </script>
+</body>
+</html>

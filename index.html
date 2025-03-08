@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Путь к сердцу</title>
+    <style>
+        body {
+            font-family: 'Georgia', serif;
+            text-align: center;
+            background: linear-gradient(135deg, #2c003e, #ff6b81);
+            padding: 20px;
+            color: #fff;
+            overflow-x: hidden;
+        }
+        .stage {
+            display: none;
+            margin: 20px auto;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 0 30px rgba(255, 105, 180, 0.3);
+            animation: fadeIn 1.5s ease-in;
+        }
+        .active {
+            display: block;
+        }
+        h1, h2 {
+            color: #ff4757;
+            text-shadow: 3px 3px 6px #d6336c;
+            font-size: 2.5em;
+        }
+        img {
+            max-width: 200px;
+            height: auto;
+            border-radius: 10px;
+            margin: 10px;
+            border: 2px solid #ff6b81;
+            transition: transform 0.3s, opacity 0.5s;
+        }
+        img:hover {
+            transform: scale(1.1);
+            opacity: 0.9;
+        }
+        .gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        p {
+            font-size: 1.2em;
+            line-height: 1.6;
+            text-shadow: 1px 1px 2px #000;
+        }
+        input {
+            padding: 12px;
+            margin: 15px;
+            font-size: 1.1em;
+            border: 2px solid #ff4757;
+            border-radius: 10px;
+            width: 60%;
+            background: rgba(255, 255, 255, 0.8);
+        }
+        button {
+            padding: 15px 30px;
+            margin: 10px;
+            font-size: 1.2em;
+            background: #ff4757;
+            color: white;
+            border: none;
+            border-radius: 30px;
+            cursor: pointer;
+            box-shadow: 0 6px #d6336c;
+            transition: all 0.3s;
+        }
+        button:hover {
+            background: #ff6b81;
+            transform: translateY(-3px);
+            box-shadow: 0 8px #d6336c;
+        }
+        button:active {
+            transform: translateY(2px);
+            box-shadow: 0 3px #d6336c;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hearts {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+        }
+        .heart {
+            position: absolute;
+            font-size: 40px;
+            color: #ff4757;
+            animation: float 6s infinite;
+        }
+        @keyframes float {
+            0% { transform: translateY(100vh); opacity: 0.8; }
+            100% { transform: translateY(-20px); opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <div class="hearts" id="hearts"></div>
+
+    <div id="intro" class="stage active">
+        <h1>Начало нашего пути</h1>
+        <p>Перед тобой — дорога к сердцу, вымощенная воспоминаниями. Эти мгновения — наш общий путь. Готова ли ты пройти его до конца?</p>
+        <div class="gallery">
+            <img src="/love-quest/images/1.JPG" alt="Момент 1">
+            <img src="/love-quest/images/2.JPG" alt="Момент 2">
+            <img src="/love-quest/images/3.JPG" alt="Момент 3">
+            <img src="/love-quest/images/4.JPG" alt="Момент 4">
+            <img src="/love-quest/images/5.JPG" alt="Момент 5">
+            <img src="/love-quest/images/6.JPG" alt="Момент 6">
+            <img src="/love-quest/images/7.JPG" alt="Момент 7">
+            <img src="/love-quest/images/8.JPG" alt="Момент 8">
+            <img src="/love-quest/images/9.JPG" alt="Момент 9">
+            <img src="/love-quest/images/10.JPG" alt="Момент 10">
+        </div>
+        <button onclick="switchStage('stage1')">Начать путешествие</button>
+    </div>
+
+    <div id="stage1" class="stage">
+        <h2>Первая тайна</h2>
+        <p>В любви есть то, что вечно манит, но ускользает, подобно ветру в ладонях. Оно не имеет формы, но наполняет душу. Что это?</p>
+        <input type="text" id="answer1">
+        <button onclick="checkAnswer(1)">Разгадать</button>
+    </div>
+
+    <div id="stage2" class="stage">
+        <h2>Второй рубеж</h2>
+        <p>Я — дар, что нельзя купить, но можно потерять в одно мгновение. Меня берегут, как сокровище, но часто ранят невзначай. Что я?</p>
+        <input type="text" id="answer2">
+        <button onclick="checkAnswer(2)">Разгадать</button>
+    </div>
+
+    <div id="stage3" class="stage">
+        <h2>Третий поворот</h2>
+        <p>Я — мост между двумя душами, что строится годами, но может рухнуть от одного слова. Что я такое?</p>
+        <input type="text" id="answer3">
+        <button onclick="checkAnswer(3)">Разгадать</button>
+    </div>
+
+    <div id="stage4" class="stage">
+        <h2>Четвёртый шаг</h2>
+        <p>Я — то, что заставляет сердце биться чаще, но в тишине обретает свою силу. Меня нельзя увидеть, но можно почувствовать в каждом взгляде. Что я?</p>
+        <input type="text" id="answer4">
+        <button onclick="checkAnswer(4)">Разгадать</button>
+    </div>
+
+    <div id="stage5" class="stage">
+        <h2>Последний вызов</h2>
+        <p>Я — сила, что рождается из слабости, растёт в испытаниях и становится вечной в прощении. Что я такое?</p>
+        <input type="text" id="answer5">
+        <button onclick="checkAnswer(5)">Дойти до конца</button>
+    </div>
+
+    <div id="final" class="stage">
+        <h1>Ты — моё всё</h1>
+        <p>Ты прошла этот путь, и каждый твой шаг был эхом в моём сердце. Ты — свет, что разгоняет мою тьму, тепло, что спасает в холодные дни. Без тебя я — лишь тень, а с тобой — целая вселенная. Спасибо, что ты есть. С праздником, моя любовь, моё дыхание, моё сердце. Пусть слёзы счастья будут нашими звёздами, а каждый день — новой главой нашей бесконечной истории. Я люблю тебя больше, чем слова могут выразить.</p>
+        <img src="/love-quest/images/10.JPG" alt="Финал" style="max-width: 300px;">
+    </div>
+
+    <script>
+        function checkAnswer(stage) {
+            let answer = document.getElementById(`answer${stage}`).value.toLowerCase().trim();
+            let nextStage = stage + 1;
+
+            if (stage === 1 && answer === "желание") {
+                switchStage(`stage${nextStage}`);
+            } else if (stage === 2 && answer === "доверие") {
+                switchStage(`stage${nextStage}`);
+            } else if (stage === 3 && answer === "понимание") {
+                switchStage(`stage${nextStage}`);
+            } else if (stage === 4 && answer === "нежность") {
+                switchStage(`stage${nextStage}`);
+            } else if (stage === 5 && answer === "любовь") {
+                switchStage("final");
+            } else {
+                alert("Ответ близок, но ещё не найден. Вспомни, что связывает сердца...");
+            }
+        }
+
+        function switchStage(next) {
+            document.querySelectorAll('.stage').forEach(stage => {
+                stage.classList.remove('active');
+            });
+            document.getElementById(next).classList.add('active');
+            window.scrollTo(0, 0); // Прокрутка вверх для нового этапа
+        }
+
+        function createHeart() {
+            const heart = document.createElement('div');
+            heart.classList.add('heart');
+            heart.innerHTML = '❤️';
+            heart.style.left = Math.random() * 100 + 'vw';
+            heart.style.animationDuration = Math.random() * 4 + 4 + 's';
+            document.getElementById('hearts').appendChild(heart);
+            setTimeout(() => heart.remove(), 6000);
+        }
+        setInterval(createHeart, 400);
+    </script>
+</body>
+</html>
